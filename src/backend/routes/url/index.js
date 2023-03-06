@@ -28,4 +28,30 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const conditions = {};
+    if (id) conditions.shortUrlId = id;
+    console.log(conditions);
+    const [error, url] = await Url.findUrl(conditions);
+    if (error) throw error;
+    console.log(url[0]);
+    const response = {
+      status: 200,
+      timestamp: moment().format(),
+      data: {
+        url,
+      },
+    };
+    let originalUrl = url[0].originalUrl.includes("http")
+      ? url[0].originalUrl
+      : `http://${url[0].originalUrl}`;
+    res.redirect(originalUrl);
+    // res.json(response);
+  } catch (error) {
+    console.error("Error finding URL", error);
+    res.status(500).json(error);
+  }
+});
 module.exports = router;
