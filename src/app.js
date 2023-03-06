@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
+const route = require("./routes/index");
+
 const app = express();
 const PORT = process.envPORT || 3000;
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -17,6 +19,7 @@ app.get("/", (req, res) => {
 });
 
 // Main route for the app
+app.use("/routes", route);
 app.use(express.json());
 
 // mongoose connection config
