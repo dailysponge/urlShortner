@@ -28,6 +28,24 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const [error, url] = await Url.findUrl({});
+    if (error) throw error;
+    const response = {
+      status: 200,
+      timestamp: moment().format(),
+      data: {
+        url,
+      },
+    };
+    res.json(response);
+  } catch (error) {
+    console.error("Error finding URL", error);
+    res.status(500).json(error);
+  }
+});
+
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;

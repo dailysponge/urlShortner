@@ -21,7 +21,7 @@ module.exports = {
       url = await url.save();
       return [null, url];
     } catch (error) {
-      console.error("Error creating URL", error);
+      console.error("Error creating URL in utils", error);
       return [error, null];
     }
   },

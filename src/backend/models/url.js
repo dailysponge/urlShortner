@@ -22,7 +22,7 @@ const urlSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-urlSchema.index({ originalUrl: 1, shortUrl: 1 });
+urlSchema.index({ originalUrl: 1, shortUrlId: 1 });
 
 const Url = mongoose.model("Url", urlSchema);
 
