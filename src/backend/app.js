@@ -19,7 +19,7 @@ app.use("/", route);
 app.use(express.json());
 
 // mongoose connection config
-mongoose.connect(MONGODB_URI, {
+mongoose.connect(`${MONGODB_URI}/GOVTECH`, {
   useNewUrlParser: true,
 });
 

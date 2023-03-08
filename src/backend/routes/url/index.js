@@ -72,4 +72,26 @@ router.get("/:id", async (req, res) => {
     res.status(500).json(error);
   }
 });
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const conditions = {};
+    if (id) conditions.shortUrlId = id;
+    const [error, url] = await Url.findAndDeleteUrl(conditions);
+    if (error) throw error;
+    const response = {
+      status: 200,
+      timestamp: moment().format(),
+      data: {
+        url,
+      },
+    };
+    res.json(response);
+  } catch (error) {
+    console.error("Error finding URL", error);
+    res.status(500).json(error);
+  }
+});
+
 module.exports = router;

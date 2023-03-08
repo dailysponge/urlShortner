@@ -9,9 +9,16 @@ module.exports = {
   createURL: async (originalUrl) => {
     try {
       const shortUrlId = shortid.generate();
-      const checkExist = await urlModel.findOne({ shortUrlId }).exec();
-      if (checkExist) {
+      const checkShortUrlExist = await urlModel.findOne({ shortUrlId }).exec();
+      if (checkShortUrlExist) {
         const error = "Short URL already exists";
+        console.error(error);
+        return [error, null];
+      }
+
+      const checkOriginalUrlExist = await urlModel.findOne({ originalUrl }).exec();
+      if (checkOriginalUrlExist) {
+        const error = "Original URL already exists";
         console.error(error);
         return [error, null];
       }
@@ -33,6 +40,15 @@ module.exports = {
       return [null, url];
     } catch (error) {
       console.error("Error finding URL", error);
+      return [error, null];
+    }
+  },
+  findAndDeleteUrl: async (conditions) => {
+    try {
+      const url = await urlModel.findOneAndDelete(conditions).exec();
+      return [null, url];
+    } catch (error) {
+      console.error("Error finding and deleting URL", error);
       return [error, null];
     }
   },
