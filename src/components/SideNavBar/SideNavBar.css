@@ -1,0 +1,13 @@
+.nav-link {
+  color: black;
+  font-weight: normal;
+}
+
+.nav-link.active {
+  font-weight: bold;
+}
+@media (max-width: 900px) {
+  .collapse {
+    display: none !important;
+  }
+}
