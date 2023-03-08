@@ -7,7 +7,7 @@ require("dotenv").config();
 const route = require("./routes/index");
 
 const app = express();
-const PORT = process.envPORT || 3001;
+const BACKEND_PORT = process.env.BACKEND_PORT || 3001;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 app.use(cors());
@@ -23,6 +23,6 @@ mongoose.connect(`${MONGODB_URI}/GOVTECH`, {
   useNewUrlParser: true,
 });
 
-app.listen(PORT, () => {
-  console.log(`URL shortener microservice running on port ${PORT}`);
+app.listen(BACKEND_PORT, () => {
+  console.log(`URL shortener microservice running on port ${BACKEND_PORT}`);
 });
