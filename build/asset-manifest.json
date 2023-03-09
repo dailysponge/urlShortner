@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/dailysponge/urlShortner/static/css/main.33b09f64.css",
+    "main.js": "/dailysponge/urlShortner/static/js/main.e96573af.js",
+    "static/js/787.095955e3.chunk.js": "/dailysponge/urlShortner/static/js/787.095955e3.chunk.js",
+    "index.html": "/dailysponge/urlShortner/index.html",
+    "main.33b09f64.css.map": "/dailysponge/urlShortner/static/css/main.33b09f64.css.map",
+    "main.e96573af.js.map": "/dailysponge/urlShortner/static/js/main.e96573af.js.map",
+    "787.095955e3.chunk.js.map": "/dailysponge/urlShortner/static/js/787.095955e3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.33b09f64.css",
+    "static/js/main.e96573af.js"
+  ]
+}
