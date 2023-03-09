@@ -2,10 +2,12 @@
 This guide will walk you through the steps necessary to set up a MongoDB Atlas database and spin up a frontend display.
 
 Prerequisites
-NodeJS version: v18.14.0 and above
-PORT : 3000 (frontend) & 3001 (backend)
-MongoDB Atlas Account
-Node.js and NPM installed on your machine.
+<ul>
+  <li>NodeJS version: v18.14.0 and above</li>
+  <li>PORT : 3000 (frontend) & 3001 (backend)</li>
+  <li>MongoDB Atlas Account</li>
+  <li>Node.js and NPM installed on your machine.</li>
+</ul>
 
 <h3>Installation</h3>
 
