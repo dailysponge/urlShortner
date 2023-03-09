@@ -4,7 +4,7 @@ import QRCode from "qrcode.react";
 function QrCode(props) {
   return (
     <div>
-      <QRCode value={props.shortUrl} />
+      <QRCode value={props.originalUrl} />
     </div>
   );
 }

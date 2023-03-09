@@ -2,6 +2,7 @@
 This guide will walk you through the steps necessary to set up a MongoDB Atlas database and spin up a frontend display.
 
 Prerequisites
+
 <ul>
   <li>NodeJS version: v18.14.0 and above</li>
   <li>PORT : 3000 (frontend) & 3001 (backend)</li>
@@ -25,7 +26,7 @@ Prerequisites
 <h3>Assumptions:<h3>
 
 1.  The application is designed to be used by a single user only, and hence it does not include authentication features.
-2.  The application is expected to be deployed with a custom domain name. However, during the development process, it may temporarily run on localhost for demonstration purposes. In this case, the QR code feature may not be applicable.
+2.  The application is expected to be deployed with a custom domain name. However, during the development process, it may temporarily run on localhost for demonstration purposes.
 3.  URL Validation: The application assumes that the user will enter a valid URL in the input field. URL checks are performed to verify that the entered URL contains ".com" and is a reachable site. If the entered URL does not meet these criteria, the application will not generate a short URL and display an error message to the user.
 4.  Timeout: When adding a new URL to the database, a maximum of 3 seconds is given before a timeout occurs. If the URL cannot be added to the database within this time frame, the application will not generate a short URL and display an error message to the user.
 

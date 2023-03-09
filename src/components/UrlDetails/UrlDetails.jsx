@@ -69,7 +69,7 @@ function UrlDetails(props) {
               </div>
             </div>
             <div className="col-sm-4 col-12 text-end pe-5">
-              <QrCode shortUrl={shortUrl} />
+              <QrCode originalUrl={props.originalUrl} />
             </div>
           </div>
         </div>
