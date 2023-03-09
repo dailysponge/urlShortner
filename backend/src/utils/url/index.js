@@ -19,7 +19,6 @@ const isValidUrl = async (url) => {
       validateStatus: (status) => status >= 200 && status < 400, // allows both success and redirect status codes
       timeout: 3000,
     });
-    console.log(response);
     return true;
   } catch (err) {
     console.log(err);
@@ -38,7 +37,9 @@ module.exports = {
         checkShortUrlExist = await urlModel.findOne({ shortUrlId }).exec();
       }
 
-      const checkOriginalUrlExist = await urlModel.findOne({ originalUrl }).exec();
+      const checkOriginalUrlExist = await urlModel
+        .findOne({ originalUrl })
+        .exec();
       if (checkOriginalUrlExist) {
         const error = "Original URL already exists";
         console.error(error);
@@ -78,6 +79,19 @@ module.exports = {
       return [null, url];
     } catch (error) {
       console.error("Error finding and deleting URL", error);
+      return [error, null];
+    }
+  },
+  findAndUpdateUrl: async (conditions, update) => {
+    try {
+      let url = await urlModel
+        .findOneAndUpdate(conditions, update, {
+          new: true,
+        })
+        .exec();
+      return [null, url];
+    } catch (error) {
+      console.error("Error finding and updating URL", error);
       return [error, null];
     }
   },

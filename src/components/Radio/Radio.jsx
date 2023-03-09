@@ -1,6 +1,6 @@
 import React from "react";
 
-function Radio({ label, name, onChange }) {
+function Radio({ label, sort, onChange }) {
   return (
     <div className="col-3">
       <div className="form-check">
@@ -8,11 +8,11 @@ function Radio({ label, name, onChange }) {
           className="form-check-input"
           type="radio"
           name="flexRadioDefault"
-          id={name}
-          value={name}
+          id={sort}
+          value={sort}
           onChange={onChange}
         />
-        <label className="form-check-label" htmlFor={name}>
+        <label className="form-check-label" htmlFor={sort}>
           {label}
         </label>
       </div>

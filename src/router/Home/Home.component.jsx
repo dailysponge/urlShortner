@@ -8,24 +8,26 @@ import Header from "../../components/NavBar/NavBar";
 import SideNavBar from "../../components/SideNavBar/SideNavBar";
 import UrlDetails from "../../components/UrlDetails/UrlDetails";
 import Radio from "../../components/Radio/Radio";
+import Alert from "../../components/Alert/Alert";
 
 const Home = () => {
   const [urlData, setUrlData] = useState([]);
   const [updateData, setUpdateData] = useState(false);
   const [sortType, setSortType] = useState("created");
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [urlClicked, setUrlClicked] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:3001").then((res) => {
+    axios.get(`http://localhost:3001/?sortType=${sortType}`).then((res) => {
       let data = res.data.data;
       setUrlData(data.url);
     });
-  }, [updateData]);
+  }, [updateData, sortType, urlClicked]);
 
   const handleDeleteUrl = (shortUrlId) => {
     axios
       .delete(`http://localhost:3001/${shortUrlId}`)
       .then((res) => {
-        console.log(res.data);
         setUpdateData((prevState) => !prevState);
       })
       .catch((err) => {
@@ -36,12 +38,23 @@ const Home = () => {
   const handleSort = (e) => {
     const value = e.target.value;
     setSortType(value);
-    console.log(sortType);
+    setAlertVisible(true);
+  };
+
+  const handleUrlClicked = () => {
+    setUrlClicked((prevState) => !prevState);
   };
 
   return (
     <div>
       <Header />
+      {alertVisible && (
+        <Alert
+          status={"success"}
+          message={"Sorted by " + sortType}
+          onDismiss={() => setAlertVisible(false)}
+        />
+      )}
       <div className="container-fluid vh-100">
         <div className="row h-100">
           <div className="col-sm-12 col-lg-3 border-end">
@@ -56,21 +69,36 @@ const Home = () => {
             ) : (
               <React.Fragment>
                 <div className="row pt-2">
-                  <Radio label={"Created Date"} name={"created"} onchange={handleSort} />
-                  <Radio label={"Most Popular"} name={"popular"} onchange={handleSort} />
+                  <Radio
+                    label={"Created Date"}
+                    sort={"created"}
+                    onChange={handleSort}
+                  />
+                  <Radio
+                    label={"Most Popular"}
+                    sort={"popular"}
+                    onChange={handleSort}
+                  />
                 </div>
                 <div className="row">
-                  {urlData.map(({ originalUrl, shortUrlId, createdAt }, index) => {
-                    return (
-                      <UrlDetails
-                        key={index}
-                        originalUrl={originalUrl}
-                        shortUrlId={shortUrlId}
-                        createdAt={createdAt}
-                        handleDeleteUrl={handleDeleteUrl}
-                      />
-                    );
-                  })}
+                  {urlData.map(
+                    (
+                      { originalUrl, shortUrlId, createdAt, numberOfClicks },
+                      index
+                    ) => {
+                      return (
+                        <UrlDetails
+                          key={index}
+                          originalUrl={originalUrl}
+                          shortUrlId={shortUrlId}
+                          createdAt={createdAt}
+                          numberOfClicks={numberOfClicks}
+                          handleDeleteUrl={handleDeleteUrl}
+                          handleUrlClicked={handleUrlClicked}
+                        />
+                      );
+                    }
+                  )}
                 </div>
               </React.Fragment>
             )}

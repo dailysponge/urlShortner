@@ -8,9 +8,7 @@ const route = require("./routes/index");
 
 const app = express();
 const BACKEND_PORT = process.env.BACKEND_PORT || 3001;
-const MONGODB_URI =
-  `mongodb+srv://dailysponge:${process.env.MONGO_PASSWORD}@intern.mold1ao.mongodb.net/?retryWrites=true&w=majority` ||
-  "mongodb://127.0.0.1:27017";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017";
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
