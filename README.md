@@ -22,10 +22,12 @@ Node.js and NPM installed on your machine.
 
 1.  The application is designed to be used by a single user only, and hence it does not include authentication features.
 2.  The application is expected to be deployed with a custom domain name. However, during the development process, it may temporarily run on localhost for demonstration purposes. In this case, the QR code feature may not be applicable.
+3.  URL Validation: The application assumes that the user will enter a valid URL in the input field. URL checks are performed to verify that the entered URL contains ".com" and is a reachable site. If the entered URL does not meet these criteria, the application will not generate a short URL and display an error message to the user.
+4.  Timeout: When adding a new URL to the database, a maximum of 3 seconds is given before a timeout occurs. If the URL cannot be added to the database within this time frame, the application will not generate a short URL and display an error message to the user.
 
 <h3>Notes on architecture diagram</h3>
+
 The architecture diagram for this application is not provided in the README file. However, some key design decisions that were made during the development process are as follows:
 
 1. NoSQL Database: For this application, a NoSQL database was used, specifically MongoDB. The reason for this is that NoSQL databases are known to be easily scalable and can support large amounts of queries. Additionally, MongoDB is a popular NoSQL database that is well-documented and has good community support.
-
 2. Hashing: The shortid library was used for generating unique identifiers for the URLs in this application. This library generates unique identifiers that are 9 characters long. These identifiers are used to create short URLs that can be easily shared and accessed by users. Hashing is important for security reasons, as it makes it difficult for malicious users to guess the URLs and access sensitive information.

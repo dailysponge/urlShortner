@@ -3,11 +3,6 @@ const urlModel = require("../../models/url");
 const https = require("https");
 const axios = require("axios");
 
-require("dotenv").config();
-
-const DOMAIN = process.env.DOMAIN || "http://localhost";
-const PORT = process.env.PORT;
-
 const isValidUrl = async (url) => {
   try {
     let header = "";

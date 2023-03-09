@@ -81,13 +81,21 @@ function PopUp(props) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="success" onClick={handleCreateUrl} disabled={!originalUrl}>
+          <Button
+            variant="success"
+            onClick={handleCreateUrl}
+            disabled={!originalUrl}
+          >
             Create Url
           </Button>
         </Modal.Footer>
       </Modal>
       {alert && (
-        <Alert status={alert.status} message={alert.message} onDismiss={handleAlertDismiss} />
+        <Alert
+          status={alert.status}
+          message={alert.message}
+          onDismiss={handleAlertDismiss}
+        />
       )}
     </div>
   );
