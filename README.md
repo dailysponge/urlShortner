@@ -2,6 +2,8 @@
 This guide will walk you through the steps necessary to set up a MongoDB Atlas database and spin up a frontend display.
 
 Prerequisites
+NodeJS version: v18.14.0 and above
+PORT : 3000 (frontend) & 3001 (backend)
 MongoDB Atlas Account
 Node.js and NPM installed on your machine.
 
@@ -13,9 +15,9 @@ Node.js and NPM installed on your machine.
 4.  Under Database, connect to the created DB via "Connect your application" and obtain the connection string starting with "mongodb+srv://".
 5.  Create a new file called .env from the template.env file in the root directory of this project.
 6.  Paste the connection string into the MONGODB_URI variable of .env file.
-7.  Fill up the BACKEND_PORT variable with a desired port number.
+7.  Fill up the BACKEND_PORT variable with 3001.
 8.  Install the required dependencies by running the command npm install.
-9.  Run the command npm start to spin up the frontend display.
+9.  Run the command `npm install` and `npm start` to spin up the frontend display.
 10. Visit http://localhost:3000/ in your browser to view the frontend display.
 
 <h3>Assumptions:<h3>
