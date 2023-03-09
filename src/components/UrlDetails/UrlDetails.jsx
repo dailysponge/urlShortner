@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,6 +13,12 @@ function UrlDetails(props) {
 
   const handleDeleteUrl = () => {
     props.handleDeleteUrl(props.shortUrlId);
+  };
+
+  const handleClick = () => {
+    axios.patch(`http://localhost:3001/${props.shortUrlId}`).catch((err) => {
+      console.log(err);
+    });
   };
 
   useEffect(() => {
@@ -38,7 +45,12 @@ function UrlDetails(props) {
             <div className="col-sm-8 col-12">
               <div className="row">
                 <h3 style={{ wordBreak: "break-all" }}>
-                  <a href={shortUrl} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={shortUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleClick}
+                  >
                     http://localhost:3001/{props.shortUrlId}
                   </a>
                 </h3>

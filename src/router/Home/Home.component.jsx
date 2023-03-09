@@ -7,10 +7,12 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Header from "../../components/NavBar/NavBar";
 import SideNavBar from "../../components/SideNavBar/SideNavBar";
 import UrlDetails from "../../components/UrlDetails/UrlDetails";
+import Radio from "../../components/Radio/Radio";
 
 const Home = () => {
   const [urlData, setUrlData] = useState([]);
   const [updateData, setUpdateData] = useState(false);
+  const [sortType, setSortType] = useState("created");
 
   useEffect(() => {
     axios.get("http://localhost:3001").then((res) => {
@@ -31,6 +33,12 @@ const Home = () => {
       });
   };
 
+  const handleSort = (e) => {
+    const value = e.target.value;
+    setSortType(value);
+    console.log(sortType);
+  };
+
   return (
     <div>
       <Header />
@@ -48,33 +56,8 @@ const Home = () => {
             ) : (
               <React.Fragment>
                 <div className="row pt-2">
-                  <div className="col-3">
-                    <div className="form-check">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="flexRadioDefault"
-                        id="flexRadioDefault1"
-                        defaultChecked
-                      />
-                      <label className="form-check-label" htmlFor="flexRadioDefault1">
-                        Created Date
-                      </label>
-                    </div>
-                  </div>
-                  <div className="col-3">
-                    <div className="form-check">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="flexRadioDefault"
-                        id="flexRadioDefault2"
-                      />
-                      <label className="form-check-label" htmlFor="flexRadioDefault2">
-                        Most popular
-                      </label>
-                    </div>
-                  </div>
+                  <Radio label={"Created Date"} name={"created"} onchange={handleSort} />
+                  <Radio label={"Most Popular"} name={"popular"} onchange={handleSort} />
                 </div>
                 <div className="row">
                   {urlData.map(({ originalUrl, shortUrlId, createdAt }, index) => {

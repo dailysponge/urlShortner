@@ -8,9 +8,8 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   try {
     const { originalUrl } = req.body;
-    if (!originalUrl) {
-      throw new Error("Missing originalUrl parameter");
-    }
+    if (!originalUrl) throw new Error("Missing originalUrl parameter");
+
     const [error, shortUrl] = await Url.createURL(originalUrl);
     if (error) throw error;
 
@@ -30,8 +29,10 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const [error, url] = await Url.findUrl({});
+    const { sortType } = req.query == "created" ? "createdAt" : "numberOfClicks";
+    const [error, url] = await Url.findUrl({}, sortType);
     if (error) throw error;
+
     const response = {
       status: 200,
       timestamp: moment().format(),

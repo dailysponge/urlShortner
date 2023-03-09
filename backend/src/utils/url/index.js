@@ -61,10 +61,10 @@ module.exports = {
       return [error, null];
     }
   },
-  findUrl: async (conditions) => {
+  findUrl: async (conditions, sortType) => {
     try {
       const query = urlModel.find(conditions);
-      query.sort({ lastAccessed: -1 });
+      query.sort({ [sortType]: -1 });
       const url = await query.exec();
       return [null, url];
     } catch (error) {
