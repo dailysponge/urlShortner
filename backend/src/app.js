@@ -8,8 +8,9 @@ const route = require("./routes/index");
 
 const app = express();
 const BACKEND_PORT = process.env.BACKEND_PORT || 3001;
-const MONGODB_URI = process.env.MONGODB_URI;
-
+const MONGODB_URI =
+  `mongodb+srv://dailysponge:${process.env.MONGO_PASSWORD}@intern.mold1ao.mongodb.net/?retryWrites=true&w=majority` ||
+  "mongodb://127.0.0.1:27017";
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -19,7 +20,7 @@ app.use("/", route);
 app.use(express.json());
 
 // mongoose connection config
-mongoose.connect(`${MONGODB_URI}/GOVTECH`, {
+mongoose.connect(`${MONGODB_URI}`, {
   useNewUrlParser: true,
 });
 
