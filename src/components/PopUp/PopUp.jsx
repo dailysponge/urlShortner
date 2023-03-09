@@ -10,21 +10,26 @@ function PopUp(props) {
   const [originalUrl, setOriginalUrl] = useState("");
   const [show, setShow] = useState(false);
   const [alert, setAlert] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleCreateUrl = () => {
+    setAlert({ status: "info", message: "Checking if your url is valid..." });
+    setIsLoading(true);
     axios
       .post("http://localhost:3001", { originalUrl })
       .then((res) => {
         props.setUpdateData((prevState) => !prevState);
+        setIsLoading(false);
         setOriginalUrl("");
         handleClose();
         setAlert({ status: "success", message: "Url created successfully!" });
       })
       .catch((err) => {
         console.log(err);
+        setIsLoading(false);
         setAlert({
           status: "danger",
           message: `Url failed to create because ${err.response.data}`,
@@ -64,12 +69,19 @@ function PopUp(props) {
             onChange={(e) => setOriginalUrl(e.target.value)}
             onKeyDown={handleKeyPress}
           />
+          {isLoading && (
+            <div className="d-flex justify-content-center mt-2">
+              <div className="spinner-grow" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="success" onClick={handleCreateUrl}>
+          <Button variant="success" onClick={handleCreateUrl} disabled={!originalUrl}>
             Create Url
           </Button>
         </Modal.Footer>

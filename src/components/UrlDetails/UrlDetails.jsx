@@ -38,7 +38,7 @@ function UrlDetails(props) {
             <div className="col-sm-8 col-12">
               <div className="row">
                 <h3 style={{ wordBreak: "break-all" }}>
-                  <a href={shortUrl} target="_blank" rel="noopener noreferrer" className="me-5">
+                  <a href={shortUrl} target="_blank" rel="noopener noreferrer">
                     http://localhost:3001/{props.shortUrlId}
                   </a>
                 </h3>
